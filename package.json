@@ -1,0 +1,28 @@
+{
+  "name": "nis2",
+  "version": "1.0.0",
+  "description": "Desafio NIS",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "php -S localhost:8080 -t .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "browser": {
+    "vue": "vue/dist/vue.common.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gandaierama/nis.git"
+  },
+  "keywords": [
+    "NIS"
+  ],
+  "author": "Daniel Batista Galvão",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gandaierama/nis/issues"
+  },
+  "homepage": "https://github.com/gandaierama/nis#readme"
+}

@@ -1,38 +1,86 @@
 <html>
 <head>
-	<title>Add Data</title>
+	<title>Cadastre seu NIS</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
 <body>
-<?php
-include_once("config.php");
-if(isset($_POST['Submit'])) {	
-	$name = $_POST['name'];
-	$age = $_POST['age'];
-	$email = $_POST['email'];
-		
-	if(empty($name) || empty($age) || empty($email)) {
-				
-		if(empty($name)) {
-			echo "<font color='red'>Opssss.. esqueceu o nome.</font><br/>";
-		}
-		if(empty($age)) {
-			echo "<font color='red'>Opssss.. esqueceu a idade.</font><br/>";
-		}
-		if(empty($email)) {
-			echo "<font color='red'>Opssss.. esqueceu o e-mail.</font><br/>";
-		}
-		echo "<br/><a href='javascript:self.history.back();'>Voltar</a>";
-	} else { 
-		$sql = "INSERT INTO users(name, age, email) VALUES(:name, :age, :email)";
-		$query = $dbConn->prepare($sql);		
-		$query->bindparam(':name', $name);
-		$query->bindparam(':age', $age);
-		$query->bindparam(':email', $email);
-		$query->execute();
-		echo "<font color='green'>Adicionado com sucesso!!!.";
-		echo "<br/><a href='index.php'>Ver NIS cadastrados</a>";
-	}
-}
-?>
+	<nav class="nav navbar-expand-lg navbar-light bg-light justify-content-center">
+	  <li class="nav-item">
+	    <a class="nav-link text-black" href="#">Desafio Nis</a>
+	  </li>
+	</nav>
+	<div class="container mt-5">
+		<div class="card card-info card-body">
+			<div id="app" class="row">
+			  	<div class="col-12 ">
+			  		<div class="card">
+			  			<div class="card-body">
+			  				<?php
+							include_once("config.php");
+							if(isset($_POST['name'])) {	
+								$name = $_POST['name'];
+								$date = new DateTime();
+								$timestamp=$date->getTimestamp();
+								$nis=rand(1,9).$timestamp;
+								
+								if(empty($name)) {
+									echo "<font color='red'>Opssss.. esqueceu o nome.</font><br/>";
+									echo "<br/><a href='javascript:self.history.back();'>Voltar</a>";
+								} else { 
+
+									$sqlC = "SELECT name, nis FROM nis  WHERE name='".$name."' LIMIT 1";
+									$queryC = $dbConn->prepare($sqlC);
+									$queryC->execute();
+									$res=$queryC->fetchAll();
+
+									if(isset($res[0]["name"])){
+										echo "";
+										?>
+											<div class="alert alert-danger text-center">
+												<h3 color='red'>Este nome já consta em nosso cadastro</h3>
+												<hr/>
+								
+												<?=$name?><br/>
+												<b><?=$res[0]["nis"]?></b>
+											</div>
+											<div class="d-grid gap-2 col-6 mx-auto">
+											 	<a class="btn btn-info" href="/">Voltar</a>
+											</div>
+										<?php
+									}else{
+										$sql = "INSERT INTO nis(name, nis) VALUES(:name, :nis)";
+										$query = $dbConn->prepare($sql);		
+										$query->bindparam(':name', $name);
+										$query->bindparam(':nis', $nis);
+										$query->execute();
+										?>
+											<div class="alert alert-success text-center ">
+												<h3 color='green'>Cadastro efetuado copm sucesso</h3>
+												<hr/>
+												<?=$name?><br/>
+												<b><?=$nis?></b>
+											</div>
+											<div class="d-grid gap-2 col-6 mx-auto">
+											 	<a class="btn btn-info" href="/">Voltar</a>
+											</div>
+										<?php
+									
+									}
+
+									
+								}
+							}
+							?>
+			  			</div>
+			  		</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+
 </body>
 </html>
+
