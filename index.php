@@ -49,7 +49,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
@@ -69,7 +68,6 @@
   				hasError: false,
   				isActive2: true,
   				hasError2: false,
-
 			  },
 			  methods: {
 			    cadastroSend: function (event) {
@@ -82,12 +80,9 @@
 			    		return{
 			    			'd-none': this.isActive
 			    		}
-      					
-      				
 			    	}else{
 			    		this.$refs.form.submit();
-			    	}
-			     	
+			    	}	
 			    },
 			    buscaSend: function (event) {
 			    	event.preventDefault();
@@ -99,21 +94,13 @@
 			    		return{
 			    			'd-none': this.isActive2
 			    		}
-      					
-      				
 			    	}else{
 			    		this.$refs.form2.submit();
 			    	}
-			     	
 			    }
-
-
-
 			  }
 			})
 		}
-		</script>
-
+	</script>
 </body>
 </html>
-
